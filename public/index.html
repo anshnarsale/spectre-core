@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPECTRE · CORE — Zero-Trace Cyber Telemetry & Security Engine</title>
+  <meta name="description" content="Next-generation zero-trace security audit and load testing platform designed by Ansh Narsale. Ephemeral memory execution with zero disk leakage.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%2308090d' stroke='%23ff3b30' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23ff5722' stroke-width='1.5' stroke-dasharray='4 2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23ff3b30'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body class="theme-spectre-core">
+
+  <!-- Main Cyber Shell Layout -->
+  <div class="cyber-shell">
+
+    <!-- ── Left Sidebar Navigation (SPECTRE · CORE) ────────────────────────── -->
+    <aside class="cyber-sidebar">
+      
+      <!-- Brand Box -->
+      <div class="sidebar-brand-box">
+        <div class="brand-top-row">
+          <div class="brand-radar-icon">
+            <span class="radar-core-pulse"></span>
+            <span class="radar-ring-expand"></span>
+          </div>
+          <div class="brand-title-wrap">
+            <h1 class="brand-title">SPECTRE · CORE</h1>
+            <span class="brand-tagline">ZERO-TRACE CYBER TELEMETRY</span>
+          </div>
+        </div>
+
+        <!-- Privacy Shield Pill -->
+        <div class="privacy-status-box">
+          <div class="privacy-indicator">
+            <span class="privacy-dot"></span>
+            <span class="privacy-text">EPHEMERAL RAM BUFFER</span>
+          </div>
+          <p class="privacy-subtext">Reports exist in browser memory only. Refreshing wipes all records.</p>
+        </div>
+      </div>
+
+      <!-- Action Button (Flame Cyber Red/Orange) -->
+      <div class="sidebar-action-wrap">
+        <button type="button" id="sidebarNewScanBtn" class="btn-cyber-primary" onclick="focusTargetInput()">
+          <span class="btn-plus">+</span>
+          <span id="btnActionLabel">New Audit Scan</span>
+        </button>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="sidebar-nav">
+        <button type="button" class="nav-link active" data-view="dashboard" onclick="switchMainView('dashboard')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
+            <rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/>
+          </svg>
+          <span>Dashboard</span>
+        </button>
+
+        <button type="button" class="nav-link" data-view="findings" onclick="switchMainView('findings')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <circle cx="12" cy="11" r="3"/>
+          </svg>
+          <span>Security Findings</span>
+          <span id="badgeFailsCount" class="nav-badge-alert">0</span>
+        </button>
+
+        <button type="button" class="nav-link" data-view="load" onclick="switchMainView('load')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          <span>Load & Latency</span>
+        </button>
+
+        <button type="button" class="nav-link" data-view="map" onclick="switchMainView('map')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+            <path d="M2 12h20"/>
+          </svg>
+          <span>Edge / Threat Map</span>
+        </button>
+
+        <!-- Quick Memory Wipe Button in Sidebar -->
+        <button type="button" class="nav-link nav-link-wipe" onclick="wipeBrowserMemory()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+          </svg>
+          <span>Wipe Memory Now</span>
+        </button>
+      </nav>
+
+      <!-- User Profile Card in Sidebar (Ansh Narsale) -->
+      <div class="sidebar-user-card">
+        <a href="https://anshnarsale.netlify.app/" target="_blank" class="user-profile-anchor" title="View Ansh Narsale's Portfolio">
+          <div class="user-avatar-pill">
+            <span class="avatar-initials">AN</span>
+            <span class="user-online-dot"></span>
+          </div>
+          <div class="user-info">
+            <div class="user-name">Ansh Narsale</div>
+            <div class="user-role">SecOps & Load Architect</div>
+          </div>
+        </a>
+        <div class="user-social-links">
+          <a href="https://anshnarsale.netlify.app/" target="_blank" class="social-icon-btn" title="Ansh's Portfolio">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </a>
+          <a href="https://github.com/anshnarsale" target="_blank" class="social-icon-btn" title="Ansh on GitHub">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── Center / Main SOC Dashboard Workspace ───────────────────────────── -->
+    <main class="cyber-main">
+
+      <!-- Top Status & Target Bar -->
+      <header class="cyber-topbar">
+        <div class="topbar-search-wrap">
+          <div class="url-input-capsule">
+            <span class="capsule-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
+              </svg>
+            </span>
+            <input 
+              type="text" 
+              id="targetUrl" 
+              placeholder="Enter website URL to audit (e.g. https://your-domain.com)" 
+              value="" 
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="topbar-right-controls">
+          <!-- Active Mode Selector -->
+          <div class="cyber-mode-pills" role="tablist">
+            <button type="button" class="mode-pill active" data-mode="full">⚡ Full Audit</button>
+            <button type="button" class="mode-pill" data-mode="security">🔒 Security</button>
+            <button type="button" class="mode-pill" data-mode="load">📈 Load</button>
+            <button type="button" class="mode-pill" data-mode="lighthouse">🚀 Lighthouse</button>
+          </div>
+
+          <!-- Audit Launch / Abort Trigger -->
+          <button type="button" id="startAuditBtn" class="btn-fire-action">
+            <span class="fire-icon">⚡</span>
+            <span id="startBtnText">EXECUTE AUDIT</span>
+          </button>
+          <button type="button" id="stopAuditBtn" class="btn-kill-action hidden">
+            <span>⏹ ABORT RUN</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Zero-Trace Privacy Feature Alert Banner -->
+      <section class="zero-trace-banner">
+        <div class="zero-trace-left">
+          <div class="shield-beacon-icon">
+            <span class="shield-pulse"></span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <div class="zero-trace-text">
+            <strong>Zero-Trace Ephemeral Architecture</strong>
+            <span>All generated reports are held strictly in client browser RAM for this active session. On refresh or tab close, all audit data is permanently purged. Nothing is stored on server disk or exposed to GitHub/Netlify.</span>
+          </div>
+        </div>
+        <div class="zero-trace-right">
+          <button type="button" class="btn-wipe-ghost" onclick="wipeBrowserMemory()">
+            <span>🗑️ Wipe Session Now</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Advanced Drawer Toggle -->
+      <div class="advanced-params-strip">
+        <button type="button" id="toggleAdvancedBtn" class="params-toggle-btn">
+          <span class="toggle-arrow" id="advancedChevron">▾</span>
+          <span>Load Testing Safety Cap & Concurrency Config</span>
+          <span class="cap-indicator">Cap: 100 RPS · Netlify Rate-Limit Guard Active</span>
+        </button>
+
+        <div id="advancedContent" class="params-panel hidden">
+          <div class="param-item">
+            <label>Load Pattern</label>
+            <select id="loadTypeSelect" class="cyber-select">
+              <option value="rampup" selected>Ramp-Up (Gradual 5 → 25 VUs)</option>
+              <option value="spike">Spike Pulse (Instant 50 VUs)</option>
+              <option value="soak">Soak Test (Sustained)</option>
+            </select>
+          </div>
+          <div class="param-item">
+            <label>Virtual Users (VUs): <span id="vusVal" class="text-ember">20</span></label>
+            <input type="range" id="vusInput" min="5" max="80" step="5" value="20" class="cyber-slider" oninput="document.getElementById('vusVal').textContent = this.value">
+          </div>
+          <div class="param-item">
+            <label>Test Duration</label>
+            <select id="durationSelect" class="cyber-select">
+              <option value="15s">15s (Pulse)</option>
+              <option value="30s" selected>30s (Recommended)</option>
+              <option value="1m">1m (Standard)</option>
+              <option value="2m">2m (Extended)</option>
+            </select>
+          </div>
+          <div class="param-item">
+            <label>Max RPS Cap</label>
+            <select id="maxRpsInput" class="cyber-select">
+              <option value="50">50 RPS</option>
+              <option value="100" selected>100 RPS</option>
+              <option value="200">200 RPS</option>
+            </select>
+          </div>
+          <div class="param-toggles">
+            <label class="cyber-check"><input type="checkbox" id="skipLighthouseCheck"><span>Skip Lighthouse</span></label>
+            <label class="cyber-check"><input type="checkbox" id="skipLoadCheck"><span>Skip Load Test</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TOP TELEMETRY 4-CARD STRIP (Matching Reference with Equalizer Animations) ── -->
+      <section class="telemetry-strip">
+        <!-- Metric 1: Open Vulnerabilities / Missing Headers -->
+        <div class="telemetry-card card-glow-hover">
+          <div class="telemetry-top">
+            <span class="telemetry-title">Open vulnerabilities</span>
+            <span class="telemetry-badge-diff badge-diff-alert" id="kpiVulnDiff">+0%</span>
+          </div>
+          <div class="telemetry-mid">
+            <span class="telemetry-value" id="kpiVulnCount">--</span>
+            <div class="telemetry-viz viz-spark-bars">
+              <span class="spark-bar sb-1"></span>
+              <span class="spark-bar sb-2"></span>
+              <span class="spark-bar sb-3"></span>
+              <span class="spark-bar sb-4"></span>
+              <span class="spark-bar sb-5"></span>
+              <span class="spark-bar sb-6"></span>
+            </div>
+          </div>
+          <div class="telemetry-sub" id="kpiVulnSub">Awaiting audit scan</div>
+        </div>
+
+        <!-- Metric 2: Active Incidents / Netlify Rate Limits -->
+        <div class="telemetry-card card-glow-hover">
+          <div class="telemetry-top">
+            <span class="telemetry-title">Active incidents & 4xx</span>
+            <span class="telemetry-badge-diff badge-diff-neutral" id="kpiIncidentsDiff">--</span>
+          </div>
+          <div class="telemetry-mid">
+            <span class="telemetry-value" id="kpiIncidentsCount">0</span>
+            <div class="telemetry-viz viz-ring">
+              <svg width="44" height="44" viewBox="0 0 44 44">
+                <circle cx="22" cy="22" r="18" fill="none" stroke="#222733" stroke-width="4"/>
+                <circle id="kpiRateCircle" cx="22" cy="22" r="18" fill="none" stroke="#ff9500" stroke-width="4"
+                  stroke-dasharray="0 113" stroke-linecap="round" transform="rotate(-90 22 22)"/>
+              </svg>
+              <span class="ring-text" id="kpiRatePct">0%</span>
+            </div>
+          </div>
+          <div class="telemetry-sub" id="kpiIncidentsSub">Netlify CDN threshold guard</div>
+        </div>
+
+        <!-- Metric 3: Compliance & Security Score -->
+        <div class="telemetry-card card-glow-hover">
+          <div class="telemetry-top">
+            <span class="telemetry-title">Compliance score</span>
+            <span class="telemetry-badge-diff badge-diff-pass" id="kpiScoreDiff">--</span>
+          </div>
+          <div class="telemetry-mid">
+            <span class="telemetry-value" id="kpiScoreVal">--%</span>
+            <div class="telemetry-viz viz-arc">
+              <svg width="54" height="34" viewBox="0 0 54 34">
+                <path d="M 6 30 A 21 21 0 0 1 48 30" fill="none" stroke="#222733" stroke-width="5" stroke-linecap="round"/>
+                <path id="kpiScoreArc" d="M 6 30 A 21 21 0 0 1 48 30" fill="none" stroke="#00e676" stroke-width="5" stroke-linecap="round"
+                  stroke-dasharray="0 66"/>
+              </svg>
+            </div>
+          </div>
+          <div class="telemetry-sub" id="kpiScoreSub">Ready to evaluate</div>
+        </div>
+
+        <!-- Metric 4: Latency & Equalizer Animation (Tail Latency p95) -->
+        <div class="telemetry-card card-glow-hover">
+          <div class="telemetry-top">
+            <span class="telemetry-title">Tail Latency (p95)</span>
+            <span class="telemetry-badge-diff badge-diff-pass" id="kpiLatencyDiff">PASS</span>
+          </div>
+          <div class="telemetry-mid">
+            <span class="telemetry-value" id="kpiLatencyVal">-- ms</span>
+            <div class="telemetry-viz viz-wave-anim">
+              <span class="anim-wave-bar wb-1"></span>
+              <span class="anim-wave-bar wb-2"></span>
+              <span class="anim-wave-bar wb-3"></span>
+              <span class="anim-wave-bar wb-4"></span>
+              <span class="anim-wave-bar wb-5"></span>
+              <span class="anim-wave-bar wb-6"></span>
+              <span class="anim-wave-bar wb-7"></span>
+              <span class="anim-wave-bar wb-8"></span>
+            </div>
+          </div>
+          <div class="telemetry-sub" id="kpiLatencySub">p50: -- · p99: --</div>
+        </div>
+      </section>
+
+      <!-- ── MIDDLE SECTION: Threat/Edge Map & Recent Activity (Animated Radar Sweep) ── -->
+      <section class="cyber-dual-grid">
+
+        <!-- Left: Threat & Global Edge CDN Map with Rotating Radar Sweep -->
+        <div class="cyber-panel panel-map">
+          <div class="panel-header">
+            <div class="panel-title-group">
+              <h3>Edge Threat & Node Telemetry</h3>
+              <span class="panel-sub" id="mapTargetHost">Awaiting Target URL</span>
+            </div>
+            <div class="panel-header-ctrls">
+              <span class="live-radar-spinner"></span>
+              <span class="live-tag">ACTIVE RADAR</span>
+            </div>
+          </div>
+
+          <!-- Stylized Cyber World Map with Laser Scanline and Radar Beacons -->
+          <div class="world-map-wrap">
+            <!-- Laser scanline animation overlay -->
+            <div class="map-scanline"></div>
+            <!-- Radar sweeping beam -->
+            <div class="radar-sweep-beam"></div>
+
+            <svg class="cyber-svg-map" viewBox="0 0 700 340" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <radialGradient id="beaconGlowRed" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ff3b30" stop-opacity="0.95"/>
+                  <stop offset="40%" stop-color="#ff3b30" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#ff3b30" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="beaconGlowGreen" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#00e676" stop-opacity="0.95"/>
+                  <stop offset="40%" stop-color="#00e676" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#00e676" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+
+              <!-- World Continent Dots Grid -->
+              <g class="map-grid-dots" fill="#1c2230" opacity="0.75">
+                <!-- North America -->
+                <circle cx="120" cy="90" r="2.5"/><circle cx="140" cy="85" r="2.5"/><circle cx="160" cy="85" r="2.5"/><circle cx="180" cy="95" r="2.5"/>
+                <circle cx="110" cy="110" r="2.5"/><circle cx="130" cy="110" r="2.5"/><circle cx="150" cy="105" r="2.5"/><circle cx="170" cy="115" r="2.5"/><circle cx="190" cy="120" r="2.5"/><circle cx="210" cy="110" r="2.5"/>
+                <circle cx="120" cy="130" r="2.5"/><circle cx="140" cy="130" r="2.5"/><circle cx="160" cy="135" r="2.5"/><circle cx="180" cy="140" r="2.5"/><circle cx="200" cy="135" r="2.5"/>
+                <circle cx="140" cy="150" r="2.5"/><circle cx="160" cy="160" r="2.5"/>
+                <!-- South America -->
+                <circle cx="210" cy="190" r="2.5"/><circle cx="230" cy="205" r="2.5"/><circle cx="240" cy="225" r="2.5"/><circle cx="250" cy="245" r="2.5"/><circle cx="240" cy="265" r="2.5"/><circle cx="230" cy="285" r="2.5"/>
+                <!-- Europe -->
+                <circle cx="340" cy="90" r="2.5"/><circle cx="360" cy="85" r="2.5"/><circle cx="380" cy="90" r="2.5"/><circle cx="400" cy="95" r="2.5"/>
+                <circle cx="330" cy="105" r="2.5"/><circle cx="350" cy="105" r="2.5"/><circle cx="370" cy="105" r="2.5"/><circle cx="390" cy="110" r="2.5"/>
+                <circle cx="340" cy="125" r="2.5"/><circle cx="360" cy="125" r="2.5"/><circle cx="380" cy="130" r="2.5"/>
+                <!-- Africa -->
+                <circle cx="350" cy="160" r="2.5"/><circle cx="370" cy="170" r="2.5"/><circle cx="390" cy="170" r="2.5"/><circle cx="410" cy="180" r="2.5"/>
+                <circle cx="360" cy="190" r="2.5"/><circle cx="380" cy="200" r="2.5"/><circle cx="400" cy="210" r="2.5"/><circle cx="390" cy="235" r="2.5"/><circle cx="380" cy="255" r="2.5"/>
+                <!-- Asia -->
+                <circle cx="430" cy="90" r="2.5"/><circle cx="460" cy="85" r="2.5"/><circle cx="490" cy="90" r="2.5"/><circle cx="520" cy="95" r="2.5"/><circle cx="550" cy="95" r="2.5"/><circle cx="580" cy="90" r="2.5"/>
+                <circle cx="440" cy="115" r="2.5"/><circle cx="470" cy="115" r="2.5"/><circle cx="500" cy="120" r="2.5"/><circle cx="530" cy="125" r="2.5"/><circle cx="560" cy="125" r="2.5"/>
+                <circle cx="470" cy="145" r="2.5"/><circle cx="490" cy="160" r="2.5"/><circle cx="520" cy="165" r="2.5"/><circle cx="550" cy="160" r="2.5"/>
+                <!-- Australia -->
+                <circle cx="560" cy="230" r="2.5"/><circle cx="590" cy="240" r="2.5"/><circle cx="610" cy="250" r="2.5"/><circle cx="570" cy="265" r="2.5"/><circle cx="600" cy="275" r="2.5"/>
+              </g>
+
+              <!-- Radar Beacons with Pulsing Wave Rings -->
+              <!-- Hotspot 1: US West (Netlify Core / San Francisco) -->
+              <g class="map-hotspot pulse-hotspot" transform="translate(130, 115)">
+                <circle cx="0" cy="0" r="32" fill="url(#beaconGlowRed)"/>
+                <circle cx="0" cy="0" r="16" fill="none" stroke="#ff3b30" stroke-width="1.2" class="hotspot-ring-anim"/>
+                <circle cx="0" cy="0" r="4.5" fill="#ff3b30"/>
+              </g>
+
+              <!-- Hotspot 2: US East (New York AWS / Netlify) -->
+              <g class="map-hotspot pulse-hotspot" transform="translate(195, 115)">
+                <circle cx="0" cy="0" r="42" fill="url(#beaconGlowRed)"/>
+                <circle cx="0" cy="0" r="22" fill="none" stroke="#ff3b30" stroke-width="1.4" class="hotspot-ring-anim"/>
+                <circle cx="0" cy="0" r="5" fill="#ff5c38"/>
+              </g>
+
+              <!-- Hotspot 3: Europe (Frankfurt / London CDN) -->
+              <g class="map-hotspot pulse-hotspot" transform="translate(365, 105)">
+                <circle cx="0" cy="0" r="28" fill="url(#beaconGlowGreen)"/>
+                <circle cx="0" cy="0" r="14" fill="none" stroke="#00e676" stroke-width="1.2" class="hotspot-ring-anim"/>
+                <circle cx="0" cy="0" r="4" fill="#00e676"/>
+              </g>
+
+              <!-- Hotspot 4: Asia / Singapore Edge (DNS resolved: 52.74.6.109) -->
+              <g class="map-hotspot pulse-hotspot" transform="translate(515, 175)">
+                <circle cx="0" cy="0" r="48" fill="url(#beaconGlowRed)"/>
+                <circle cx="0" cy="0" r="24" fill="none" stroke="#ff3b30" stroke-width="1.5" class="hotspot-ring-anim"/>
+                <circle cx="0" cy="0" r="5" fill="#ff3b30"/>
+              </g>
+
+              <!-- Hotspot 5: Sydney Australia -->
+              <g class="map-hotspot pulse-hotspot" transform="translate(595, 255)">
+                <circle cx="0" cy="0" r="52" fill="url(#beaconGlowRed)"/>
+                <circle cx="0" cy="0" r="26" fill="none" stroke="#ff3b30" stroke-width="1.6" class="hotspot-ring-anim"/>
+                <circle cx="0" cy="0" r="6" fill="#ff3b30"/>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Regional Edge Progress Bars (Exact Reference Match) -->
+          <div class="node-telemetry-bars">
+            <div class="node-bar-row">
+              <span class="node-val">72</span>
+              <div class="node-track"><div class="node-fill anim-pulse-bar" style="width: 82%"></div></div>
+              <span class="node-label">Sydney, Australia (Edge CDN)</span>
+            </div>
+            <div class="node-bar-row">
+              <span class="node-val">58</span>
+              <div class="node-track"><div class="node-fill anim-pulse-bar" style="width: 66%"></div></div>
+              <span class="node-label">New York, USA (Primary PoP)</span>
+            </div>
+            <div class="node-bar-row">
+              <span class="node-val">21</span>
+              <div class="node-track"><div class="node-fill anim-pulse-bar" style="width: 32%"></div></div>
+              <span class="node-label">Frankfurt, Germany (TLS Gateway)</span>
+            </div>
+            <div class="node-bar-row">
+              <span class="node-val">12</span>
+              <div class="node-track"><div class="node-fill anim-pulse-bar" style="width: 18%"></div></div>
+              <span class="node-label">Singapore (52.74.6.109 Target)</span>
+            </div>
+            <div class="node-bar-row">
+              <span class="node-val">4</span>
+              <div class="node-track"><div class="node-fill anim-pulse-bar" style="width: 8%"></div></div>
+              <span class="node-label">Los Angeles, USA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Recent Activity / Live Telemetry Stream -->
+        <div class="cyber-panel panel-activity">
+          <div class="panel-header">
+            <h3>Recent activity</h3>
+            <div class="panel-header-ctrls">
+              <button type="button" class="btn-terminal-toggle" onclick="toggleLiveConsole()">
+                <span id="consoleToggleLabel">Console: LIVE</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Activity List Feed -->
+          <div class="activity-feed-list" id="activityFeedList">
+            <div class="activity-empty-state">
+              <span class="pulse-ring-sm"></span>
+              <span>SPECTRE · CORE listening. Run an audit to capture live findings.</span>
+            </div>
+          </div>
+
+          <!-- Expandable Live Execution Terminal Console -->
+          <div id="liveConsoleDrawer" class="live-console-box">
+            <div class="console-subbar">
+              <span class="console-indicator">● SSE TELEMETRY STREAM ACTIVE</span>
+              <button class="btn-clear-term" onclick="clearTerminalLogs()">Clear</button>
+            </div>
+            <div id="terminalBody" class="console-body">
+              <div class="term-line term-system">[SYSTEM] SPECTRE · CORE Zero-Trace Engine Ready. All records remain in ephemeral client memory.</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ── DEEP DIVE TABS: Security Findings, Load Metrics, Lighthouse ───── -->
+      <section class="cyber-panel panel-details" id="detailsSection">
+        <div class="details-tab-bar">
+          <button class="details-tab-btn active" onclick="switchDetailTab('secFindings')">
+            <span class="tab-badge-icon">🛡️</span>
+            <span>Security Findings (<span id="totalSecCount">0</span>)</span>
+          </button>
+          <button class="details-tab-btn" onclick="switchDetailTab('loadMetrics')">
+            <span class="tab-badge-icon">📈</span>
+            <span>Load & Response Codes</span>
+          </button>
+          <button class="details-tab-btn" onclick="switchDetailTab('lighthouseTab')">
+            <span class="tab-badge-icon">🚀</span>
+            <span>Lighthouse & Web Vitals</span>
+          </button>
+        </div>
+
+        <!-- Sub-Pane 1: Security Findings -->
+        <div id="paneSecFindings" class="detail-pane active">
+          <div class="findings-filter-row">
+            <div class="filter-pills">
+              <button class="f-pill active" data-f="all" onclick="filterFindings('all')">All Checks</button>
+              <button class="f-pill pill-alert" data-f="fail" onclick="filterFindings('fail')">Failed (<span id="fCountFail">0</span>)</button>
+              <button class="f-pill pill-warn" data-f="warn" onclick="filterFindings('warn')">Warnings (<span id="fCountWarn">0</span>)</button>
+              <button class="f-pill pill-pass" data-f="pass" onclick="filterFindings('pass')">Passed (<span id="fCountPass">0</span>)</button>
+            </div>
+            <div class="findings-actions">
+              <button type="button" id="btnDownloadHtml" class="btn-cyber-outline" onclick="exportHtmlReportLocally()">
+                <span>Export Standalone HTML ↗</span>
+              </button>
+              <button type="button" id="btnDownloadJson" class="btn-cyber-outline" onclick="exportJsonDataLocally()">
+                <span>Export JSON Data ↓</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="cyber-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Security Check</th>
+                  <th>Status</th>
+                  <th>Severity</th>
+                  <th>Analysis & Remediation Advice</th>
+                </tr>
+              </thead>
+              <tbody id="findingsTableBody">
+                <tr>
+                  <td colspan="5" style="text-align:center;color:var(--text-dim);padding:30px">
+                    No active audit findings yet. Click "EXECUTE AUDIT" above to analyze your target.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Sub-Pane 2: Load Test Metrics -->
+        <div id="paneLoadMetrics" class="detail-pane">
+          <div id="loadDetailsContainer">
+            <div style="color:var(--text-dim);text-align:center;padding:30px">No load testing data captured in current session.</div>
+          </div>
+        </div>
+
+        <!-- Sub-Pane 3: Lighthouse -->
+        <div id="paneLighthouse" class="detail-pane">
+          <div id="lighthouseScoresGrid" class="lh-scores-grid">
+            <div style="color:var(--text-dim);padding:30px;text-align:center">Lighthouse scan awaiting execution.</div>
+          </div>
+          <div id="lhDiagnosticsWrap"></div>
+        </div>
+
+      </section>
+
+      <!-- ── CYBER FOOTER (Made by Ansh Narsale) ────────────────────────────── -->
+      <footer class="cyber-footer">
+        <div class="footer-left">
+          <div class="footer-brand">
+            <span class="pulse-beacon-sm"></span>
+            <strong>SPECTRE · CORE</strong> <span>v1.0.0</span>
+          </div>
+          <div class="footer-compliance">
+            <span>Ephemeral Zero-Trace Memory</span> • 
+            <span>Netlify & GitHub Safe (No Reports Committed)</span> • 
+            <span>Passive Read-Only Engine</span>
+          </div>
+        </div>
+
+        <div class="footer-center">
+          <div class="footer-attribution">
+            Designed & Engineered with ⚡ by 
+            <a href="https://anshnarsale.netlify.app/" target="_blank" class="author-link">Ansh Narsale</a>
+          </div>
+        </div>
+
+        <div class="footer-right">
+          <a href="https://anshnarsale.netlify.app/" target="_blank" class="footer-link-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span>anshnarsale.netlify.app</span>
+          </a>
+          <a href="https://github.com/anshnarsale" target="_blank" class="footer-link-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            <span>GitHub Profile</span>
+          </a>
+        </div>
+      </footer>
+
+    </main>
+
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
