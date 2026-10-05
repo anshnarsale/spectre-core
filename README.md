@@ -4,6 +4,7 @@
   <strong>Zero-Trace Cyber Telemetry · Non-Destructive Security Audit · HTTP Load Engine</strong>
 </p>
 
+<<<<<<< HEAD
 <p align="center">
   <i>Enterprise-inspired security posture analysis and performance telemetry from a single command center.</i>
 </p>
@@ -11,6 +12,12 @@
 <p align="center">
   <a href="https://github.com/anshnarsale/spectre-core">
     <img src="https://img.shields.io/badge/Repository-SPECTRE%20CORE-111827?style=for-the-badge&logo=github&logoColor=white" alt="Repository">
+  </a>
+  <a href="https://anshnarsale.github.io/spectre-core/">
+    <img src="https://img.shields.io/badge/Live%20Dashboard-GitHub%20Pages-38bdf8?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Pages">
+  </a>
+  <a href="https://github.com/anshnarsale/spectre-core/packages">
+    <img src="https://img.shields.io/badge/Package-@anshnarsale/spectre--core-f97316?style=for-the-badge&logo=npm&logoColor=white" alt="GitHub Packages">
   </a>
   <a href="https://nodejs.org/">
     <img src="https://img.shields.io/badge/Node.js-%3E%3D20-0f172a?style=for-the-badge&logo=node.js&logoColor=339933" alt="Node.js">
@@ -37,6 +44,41 @@
 <p align="center">
   <i>SPECTRE · CORE — SOC-inspired telemetry dashboard</i>
 </p>
+
+---
+
+## 📦 Run Instantly via NPX or Install Package
+
+You can launch the dashboard or run CLI audits instantly without cloning:
+
+```bash
+# Launch the Web Dashboard immediately
+npx @anshnarsale/spectre-core ui
+
+# Run an immediate security audit
+npx @anshnarsale/spectre-core security --target https://your-site.com
+
+# Run a high-speed load test with safety cap
+npx @anshnarsale/spectre-core load --target https://your-site.com --type rampup --vus 30
+```
+
+### Install Globally via GitHub Packages
+Configure your npm client to use GitHub Packages:
+```bash
+echo "@anshnarsale:registry=https://npm.pkg.github.com" >> ~/.npmrc
+npm install -g @anshnarsale/spectre-core
+
+# Now use the 'spectre' command anywhere!
+spectre ui
+spectre audit --target https://your-site.com
+```
+
+---
+
+## 🌐 Live GitHub Pages Deployment
+
+The static zero-trace dashboard is automatically deployed via GitHub Actions:  
+👉 **[https://anshnarsale.github.io/spectre-core/](https://anshnarsale.github.io/spectre-core/)**
 
 ---
 
