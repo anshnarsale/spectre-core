@@ -1,0 +1,49 @@
+{
+  "name": "spectre-core",
+  "version": "1.0.0",
+  "description": "Zero-Trace Cyber Telemetry, Non-Destructive Security Audit, and HTTP Load Testing Suite",
+  "main": "dist/cli.js",
+  "bin": {
+    "spectre": "./bin/tool.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/cli.ts",
+    "tool": "ts-node src/cli.ts",
+    "security": "ts-node src/cli.ts security",
+    "audit": "ts-node src/cli.ts audit",
+    "ui": "ts-node src/server.ts",
+    "start": "ts-node src/server.ts"
+  },
+  "keywords": [
+    "security",
+    "load-testing",
+    "telemetry",
+    "audit",
+    "undici",
+    "cyber-defense",
+    "zero-trace"
+  ],
+  "author": "Ansh Narsale <anshnarsale2003@gmail.com> (https://anshnarsale.netlify.app/)",
+  "homepage": "https://anshnarsale.netlify.app/",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@types/autocannon": "^7.12.7",
+    "@types/express": "^5.0.6",
+    "@types/node-fetch": "^2.6.13",
+    "autocannon": "^8.0.0",
+    "chalk": "^4.1.2",
+    "commander": "^12.0.0",
+    "dns2": "^3.1.1",
+    "express": "^5.2.1",
+    "node-fetch": "^2.7.0",
+    "undici": "^8.11.2"
+  }
+}

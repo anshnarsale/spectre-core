@@ -1,0 +1,10 @@
+node_modules/
+dist/
+reports/*
+!reports/.gitkeep
+*.log
+.env
+.env.*
+.DS_Store
+.system_generated/
+*.tmp
