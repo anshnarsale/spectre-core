@@ -53,11 +53,9 @@ function resolveShared(opts: Record<string, unknown>): {
 const program = new Command();
 
 program
-  .name('tool')
-  .description('Local load-testing and security-audit tool')
+  .name('spectre')
+  .description('SPECTRE · CORE — Zero-Trace Cyber Telemetry & Security Engine')
   .version(VERSION)
-  // Note: --target / --max-rps / --verbose are declared on each subcommand
-  // via addSharedOpts() to prevent Commander consuming them at the parent level.
   .passThroughOptions(false);
 
 // ── security ──────────────────────────────────────────────────────────────────
@@ -258,5 +256,16 @@ addSharedOpts(
   logger.success(`JSON:     ${jsonPath}`);
   logger.info('\nOpen the HTML report in your browser to view results.');
 });
+
+// ── ui ────────────────────────────────────────────────────────────────────────
+program
+  .command('ui')
+  .description('Launch the SPECTRE · CORE Web Telemetry Dashboard')
+  .option('-p, --port <number>', 'Port to listen on', '3000')
+  .action((opts: Record<string, unknown>) => {
+    const port = parseInt((opts['port'] as string) || '3000', 10);
+    const { startServer } = require('./server');
+    startServer(port);
+  });
 
 program.parse(process.argv);
