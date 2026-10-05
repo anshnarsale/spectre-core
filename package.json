@@ -1,19 +1,33 @@
 {
-  "name": "spectre-core",
+  "name": "@anshnarsale/spectre-core",
   "version": "1.0.0",
   "description": "Zero-Trace Cyber Telemetry, Non-Destructive Security Audit, and HTTP Load Testing Suite",
   "main": "dist/cli.js",
+  "types": "dist/types.d.ts",
   "bin": {
-    "spectre": "./bin/tool.js"
+    "spectre": "./bin/tool.js",
+    "spectre-core": "./bin/tool.js"
   },
+  "files": [
+    "dist",
+    "bin",
+    "public",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "dev": "ts-node src/cli.ts",
     "tool": "ts-node src/cli.ts",
     "security": "ts-node src/cli.ts security",
     "audit": "ts-node src/cli.ts audit",
     "ui": "ts-node src/server.ts",
     "start": "ts-node src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anshnarsale/spectre-core.git"
   },
   "keywords": [
     "security",
@@ -22,12 +36,20 @@
     "audit",
     "undici",
     "cyber-defense",
-    "zero-trace"
+    "zero-trace",
+    "soc-dashboard"
   ],
   "author": "Ansh Narsale <anshnarsale2003@gmail.com> (https://anshnarsale.netlify.app/)",
-  "homepage": "https://anshnarsale.netlify.app/",
+  "homepage": "https://github.com/anshnarsale/spectre-core#readme",
+  "bugs": {
+    "url": "https://github.com/anshnarsale/spectre-core/issues"
+  },
   "license": "MIT",
   "type": "commonjs",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  },
   "devDependencies": {
     "@types/node": "^22.20.5",
     "ts-node": "^10.9.2",
