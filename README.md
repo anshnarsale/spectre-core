@@ -4,7 +4,7 @@
   <strong>Zero-Trace Cyber Telemetry · Non-Destructive Security Audit · HTTP Load Engine</strong>
 </p>
 
-<<<<<<< HEAD
+
 <p align="center">
   <i>Enterprise-inspired security posture analysis and performance telemetry from a single command center.</i>
 </p>
